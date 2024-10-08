@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 19:33:42 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/08 19:33:43 by mdonmeze         ###   ########.fr       */
+/*   Created: 2024/10/08 19:34:00 by mdonmeze          #+#    #+#             */
+/*   Updated: 2024/10/08 19:34:47 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isascii(int c)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	return (c >= 0 && c <= 127);
+	
 }

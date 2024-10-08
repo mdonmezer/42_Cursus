@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 19:33:24 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/08 19:33:25 by mdonmeze         ###   ########.fr       */
+/*   Created: 2024/10/08 19:33:54 by mdonmeze          #+#    #+#             */
+/*   Updated: 2024/10/08 19:33:55 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+static void	ft_itoa_p(char *dest, int *i, int n)
 {
-	int count = 0;
-	int i = 0;
-	int isaret = 1;
-	while (str[i] >= 9 && str[i] <= 13 || str[i] == 32)
+	if (n == -2147483648)
 	{
-		i++;
+		ft_strlcpy(dest, "-2147483648", 12);
 	}
-	if (str[i] == 43 || str[i] == 45)
+	else if (n < 0)
 	{
-		if (str[i] == 45)
-			isaret = -1;
-		i++;
+		dest[0] = '-';
+		(*i)++;
+		ft_itoa_p(dest, i, -n);
 	}
-	while (ft_isdigit(str[i]))
+	else if (n > 9)
 	{
-		count = (count * 10) + (str[i] - '0');
-		i++;
+		ft_itoa_p(dest, i, n / 10);
+		ft_itoa_p(dest, i, n % 10);
 	}
-	return (count * isaret);
+	else
+	{
+		dest[*i] = n + '0';
+		(*i)++;
+	}
+}
+
+char	*ft_itoa(int n)
+{
+	char *c;
+	int i;
+
+	i = 0;
+	c = (char *)malloc(100);
+	ft_itoa_p(c, &i, n);
+	return (c);
 }
