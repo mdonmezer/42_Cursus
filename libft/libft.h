@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:34:12 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/08 19:34:13 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/10/09 20:08:57 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ size_t		ft_strlcpy(char *dest, const char *src, size_t destsize);
 size_t		ft_strlen(const char *str);
 char		*ft_strdup(const char *str);
 size_t		ft_strlcat(char *dest, const char *src, size_t size);
+char		*ft_strtrim(char const *s1, char const *set);
+char		*ft_strchr(const char *s, int c);
+
+
+
 
 
 
