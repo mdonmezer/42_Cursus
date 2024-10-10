@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:34:12 by mdonmeze          #+#    #+#             */
-/*   Updated: 2024/10/09 20:08:57 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:54:30 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
 
 typedef struct s_list
 {
@@ -45,6 +47,17 @@ char		*ft_strdup(const char *str);
 size_t		ft_strlcat(char *dest, const char *src, size_t size);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_strchr(const char *s, int c);
+char		*ft_strrchr(const char *s, int c);
+char		*ft_strjoin(char const *s1, char const *s2);
+
+
+//put
+
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *str, int fd);
+void	ft_putendl_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+
 
 
 
