@@ -6,7 +6,7 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 01:56:45 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/06/27 01:58:18 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/07/13 23:50:22 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -46,7 +47,7 @@ typedef enum e_redir_type
 
 typedef struct s_redirect
 {
-	char				**filename;
+	char				*filename;
 	t_redir_type		type;
 	struct s_redirect	*next;
 }	t_redirect;
@@ -60,8 +61,10 @@ typedef struct s_command
 //yeni shellin genel durumunu tutan ana yapı!!!!.
 typedef struct s_shell
 {
-	char	**envp;
-	int		last_exit_code;
+	char		**envp;
+	int			last_exit_code;
+	t_command	*command;
+	t_token		*token;
 }	t_shell;
 
 extern int g_last_exit_status;
@@ -71,6 +74,24 @@ int					is_metachar(char c);
 t_token				*create_token(char *value, int type);
 void				add_token(t_token **head, t_token *new_token);
 void				free_tokens(t_token *head);
-char			*get_command_path(char *cmd, char **envp);
+void free_envp(char **envp);
+void				execute_pipeline(t_command *pipeline, t_shell *shell);
+t_redirect				*create_redirection(int type, char **file);
+void					add_redirection(t_redirect **head,
+							t_redirect *new_redirection);
+void					free_redirections(t_redirect *head);
+void					free_commands(t_command *head);
+int						count_args(t_token *tokens);
+char			*get_command_path(char *cmd, t_shell *shell);
+t_command	*parser(t_token *tokens);
+int builtin_pwd(void);
+int is_builtin(char *cmd);
+int	builtin_env(t_shell *shell);
+int builtin_cd(t_command *cmd, t_shell *shell);
+int execute_builtin(t_command *cmd, t_shell *shell);
+int					handle_redirections(t_command *cmd);
+int builtin_exit(t_command *cmd, t_shell *shell);
+char **copy_envp(char **envp);
+
 
 #endif
