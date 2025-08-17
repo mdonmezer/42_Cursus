@@ -18,7 +18,6 @@ int	builtin_env(t_shell *shell)
 
 	if (!shell || !shell->envp)
 		return (1);
-
 	i = 0;
 	while (shell->envp[i])
 	{

@@ -1,50 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/13 17:07:50 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/07/13 17:14:52 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/06/27 01:49:19 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/07/09 12:55:01 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char **copy_envp(char **envp)
+int	builtin_pwd(void)
 {
-	char	**new_env;
-	int		count;
-	int		i;
+	char	cwd[1024];
 
-	count = 0;
-	while (envp && envp[count])
-		count++;
-	new_env = (char **)malloc(sizeof(char *) * (count + 1));
-	if (!new_env)
-		return (NULL);
-	i = 0;
-	while (i < count)
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		new_env[i] = ft_strdup(envp[i]);
-		i++;
+		printf("%s\n", cwd);
+		return (0);
 	}
-	new_env[i] = NULL;
-	return (new_env);
-}
-
-void free_envp(char **env)
-{
-	int	i;
-
-	if (!env)
-		return ;
-	i = 0;
-	while (env[i])
+	else
 	{
-		free(env[i]);
-		i++;
+		perror("minishell: pwd");
+		return (1);
 	}
-	free(env);
+	ft_memset(cwd, 0, sizeof(cwd));
 }

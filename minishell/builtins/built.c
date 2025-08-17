@@ -6,13 +6,13 @@
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 12:55:09 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/07/11 23:16:44 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/08/15 20:25:53 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int is_builtin(char *cmd)
+int	is_builtin(char *cmd)
 {
 	if (!cmd)
 		return (0);
@@ -24,14 +24,20 @@ int is_builtin(char *cmd)
 		return (1);
 	if (ft_strncmp(cmd, "exit", 5) == 0)
 		return (1);
+	if (ft_strncmp(cmd, "echo", 5) == 0)
+		return (1);
+	if (ft_strncmp(cmd, "export", 7) == 0)
+		return (1);
+	if (ft_strncmp(cmd, "unset", 6) == 0)
+		return (1);
 	return (0);
 }
 
-int execute_builtin(t_command *cmd, t_shell *shell)
+int	execute_builtin(t_command *cmd, t_shell *shell)
 {
-	(void)shell;
-	char *command_name;
+	char	*command_name;
 
+	(void)shell;
 	command_name = cmd->args[0];
 	if (ft_strncmp(command_name, "pwd", 4) == 0)
 		return (builtin_pwd());
@@ -41,5 +47,11 @@ int execute_builtin(t_command *cmd, t_shell *shell)
 		return (builtin_cd(cmd, shell));
 	if (ft_strncmp(command_name, "exit", 5) == 0)
 		return (builtin_exit(cmd, shell));
+	if (ft_strncmp(command_name, "echo", 5) == 0)
+		return (builtin_echo(cmd));
+	if (ft_strncmp(command_name, "export", 7) == 0)
+		return (builtin_export(cmd, shell));
+	if (ft_strncmp(command_name, "unset", 6) == 0)
+		return (builtin_unset(cmd, shell));
 	return (0);
 }

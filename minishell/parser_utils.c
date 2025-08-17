@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: beergin <beergin@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 00:29:04 by beergin           #+#    #+#             */
-/*   Updated: 2025/07/12 20:20:10 by mdonmeze         ###   ########.fr       */
+/*   Updated: 2025/08/13 12:29:11 by beergin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	is_whitespace(char c)
 
 int	is_metachar(char c)
 {
-	if (c == '|' || c == '<' || c == '>' || c == '$')
+	if (c == '|' || c == '<' || c == '>')
 		return (1);
 	return (0);
 }
 
-t_token	*create_token(char *value, int type)
+t_token	*create_token(char *value, int type, int quote_type)
 {
 	t_token	*new_token;
 
@@ -39,6 +39,8 @@ t_token	*create_token(char *value, int type)
 	}
 	new_token->value = value;
 	new_token->type = type;
+	new_token->quote_type = quote_type;
+	new_token->joined_to_prev = 0;
 	new_token->next = NULL;
 	return (new_token);
 }
@@ -60,14 +62,17 @@ void	add_token(t_token **head, t_token *new_token)
 
 void	free_tokens(t_token *head)
 {
-	t_token *tmp;
+	t_token	*tmp;
+
 	while (head)
 	{
 		tmp = head;
 		head = head->next;
 		if (tmp->value)
+		{
 			free(tmp->value);
+			tmp->value = NULL;
+		}
 		free(tmp);
 	}
-	head = NULL;
 }

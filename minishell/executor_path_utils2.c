@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   executor_path_utils2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdonmeze <mdonmeze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 01:49:19 by mdonmeze          #+#    #+#             */
-/*   Updated: 2025/07/09 12:55:01 by mdonmeze         ###   ########.fr       */
+/*   Created: 2025/08/15 20:22:06 by mdonmeze          #+#    #+#             */
+/*   Updated: 2025/08/15 20:22:07 by mdonmeze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-int builtin_pwd(void)
+char	*search_in_paths(char **p, char *c)
 {
-	char cwd[1024];
+	int		i;
+	char	*path_part;
+	char	*full_path;
 
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	i = 0;
+	while (p[i])
 	{
-		printf("%s\n", cwd);
-		return (0);
+		path_part = ft_strjoin(p[i], "/");
+		full_path = ft_strjoin(path_part, c);
+		free(path_part);
+		if (access(full_path, X_OK) == 0)
+			return (full_path);
+		free(full_path);
+		i++;
 	}
-	else
-	{
-		perror("minishell: pwd");
-		return (1);
-	}
-	ft_memset(cwd, 0, sizeof(cwd));
+	return (NULL);
 }
