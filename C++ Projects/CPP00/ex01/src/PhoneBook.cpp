@@ -10,7 +10,10 @@ std::string PhoneBook::getInput(const std::string &prompt) const {
 	std::string input;
 	do {
 		std::cout << prompt;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input)) {
+			std::cout << "\n👋 Goodbye!" << std::endl;
+			exit(0);
+		}
 		if (input.empty())
 			std::cout << "  ⚠️  Field cannot be empty! Try again." << std::endl;
 	} while (input.empty());
@@ -75,7 +78,10 @@ void PhoneBook::searchContacts() const {
 
 	std::string input;
 	std::cout << "\n🔍 Enter contact index (0-" << (totalContacts - 1) << "): ";
-	std::getline(std::cin, input);
+	if (!std::getline(std::cin, input)) {
+		std::cout << "\n👋 Goodbye!" << std::endl;
+		exit(0);
+	}
 
 	if (input.length() == 1 && input[0] >= '0' && input[0] < '0' + totalContacts)
 		showContact(input[0] - '0');
