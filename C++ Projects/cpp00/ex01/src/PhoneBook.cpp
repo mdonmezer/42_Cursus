@@ -10,10 +10,8 @@ std::string PhoneBook::getInput(const std::string &prompt) const {
 	std::string input;
 	do {
 		std::cout << prompt;
-		if (!std::getline(std::cin, input)) {
-			std::cout << "\n👋 Goodbye!" << std::endl;
-			exit(0);
-		}
+		if (!std::getline(std::cin, input))
+			return "";
 		if (input.empty())
 			std::cout << "  ⚠️  Field cannot be empty! Try again." << std::endl;
 	} while (input.empty());
@@ -22,13 +20,29 @@ std::string PhoneBook::getInput(const std::string &prompt) const {
 
 void PhoneBook::addContact() {
 	Contact c;
+	std::string input;
 
 	std::cout << "\n📝 Adding new contact..." << std::endl;
-	c.setFirstName(getInput("First name: "));
-	c.setLastName(getInput("Last name: "));
-	c.setNickName(getInput("Nickname: "));
-	c.setPhoneNumber(getInput("Phone number: "));
-	c.setDarkestSecret(getInput("Darkest secret: "));
+
+	input = getInput("First name: ");
+	if (input.empty()) return;
+	c.setFirstName(input);
+
+	input = getInput("Last name: ");
+	if (input.empty()) return;
+	c.setLastName(input);
+
+	input = getInput("Nickname: ");
+	if (input.empty()) return;
+	c.setNickName(input);
+
+	input = getInput("Phone number: ");
+	if (input.empty()) return;
+	c.setPhoneNumber(input);
+
+	input = getInput("Darkest secret: ");
+	if (input.empty()) return;
+	c.setDarkestSecret(input);
 
 	contacts[currentIndex] = c;
 	currentIndex = (currentIndex + 1) % 8;
@@ -79,8 +93,7 @@ void PhoneBook::searchContacts() const {
 	std::string input;
 	std::cout << "\n🔍 Enter contact index (0-" << (totalContacts - 1) << "): ";
 	if (!std::getline(std::cin, input)) {
-		std::cout << "\n👋 Goodbye!" << std::endl;
-		exit(0);
+		return;
 	}
 
 	if (input.length() == 1 && input[0] >= '0' && input[0] < '0' + totalContacts)
