@@ -56,9 +56,9 @@ void PhoneBook::displayContactTable() const {
 	std::cout << "\n📋 Phonebook Contacts:" << std::endl;
 	std::cout << "┌──────────┬──────────┬──────────┬──────────┐" << std::endl;
 	std::cout << "│" << std::setw(10) << std::right << "Index" << "│"
-			  << std::setw(10) << std::right << "First" << "│"
-			  << std::setw(10) << std::right << "Last" << "│"
-			  << std::setw(10) << std::right << "Nick" << "│" << std::endl;
+			  << std::setw(10) << std::right << "First Name" << "│"
+			  << std::setw(10) << std::right << "Last Name" << "│"
+			  << std::setw(10) << std::right << "Nick Name" << "│" << std::endl;
 	std::cout << "├──────────┼──────────┼──────────┼──────────┤" << std::endl;
 
 	for (int i = 0; i < totalContacts; i++) {
