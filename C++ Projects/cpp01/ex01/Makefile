@@ -1,31 +1,17 @@
-NAME		= MoarBrainz
-
+NAME		= moar_brainz
 CC			= c++
-CFLAGS		= -Wall -Wextra -Werror -std=c++98 -I include
+CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-SRC_DIR		= src
-OBJ_DIR		= obj
-INC_DIR		= include
-
-SRC			= $(SRC_DIR)/main.cpp \
-			  $(SRC_DIR)/Zombie.cpp \
-			  $(SRC_DIR)/zombieHorde.cpp
-
-OBJ			= $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-
-HEADER		= $(INC_DIR)/Zombie.hpp
+SRCS		= main.cpp Zombie.cpp zombieHorde.cpp
+OBJS		= $(SRCS:.cpp=.o)
 
 all:		$(NAME)
 
-$(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-
-$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.cpp $(HEADER)
-			@mkdir -p $(OBJ_DIR)
-			$(CC) $(CFLAGS) -c $< -o $@
+$(NAME):	$(OBJS)
+			$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-			rm -rf $(OBJ_DIR)
+			rm -f $(OBJS)
 
 fclean:		clean
 			rm -f $(NAME)
