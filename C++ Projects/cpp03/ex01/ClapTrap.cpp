@@ -1,21 +1,17 @@
 #include "ClapTrap.hpp"
 
-// Default constructor
 ClapTrap::ClapTrap() : _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "ClapTrap Default constructor called!" << std::endl;
 }
 
-// Parameterized constructor
 ClapTrap::ClapTrap(const std::string& name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "ClapTrap Parameterized constructor called for " << this->_name << "!" << std::endl;
 }
 
-// Copy constructor
 ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name), _hitPoints(other._hitPoints), _energyPoints(other._energyPoints), _attackDamage(other._attackDamage) {
 	std::cout << "ClapTrap Copy constructor called, cloning " << this->_name << "!" << std::endl;
 }
 
-// Copy assignment operator
 ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
 	std::cout << "ClapTrap Copy assignment operator called for " << this->_name << " from " << other._name << "!" << std::endl;
 	if (this != &other) {
@@ -27,12 +23,10 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
 	return *this;
 }
 
-// Destructor
 ClapTrap::~ClapTrap() {
 	std::cout << "ClapTrap Destructor called for " << this->_name << "!" << std::endl;
 }
 
-// Attack function
 void ClapTrap::attack(const std::string& target) {
 	if (this->_hitPoints == 0) {
 		std::cout << "ClapTrap " << this->_name << " is completely broken and cannot attack!" << std::endl;
@@ -47,7 +41,6 @@ void ClapTrap::attack(const std::string& target) {
 			  << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
 }
 
-// Take damage function
 void ClapTrap::takeDamage(unsigned int amount) {
 	if (this->_hitPoints == 0) {
 		std::cout << "ClapTrap " << this->_name << " is already destroyed, stop hitting it!" << std::endl;
@@ -63,7 +56,6 @@ void ClapTrap::takeDamage(unsigned int amount) {
 	}
 }
 
-// Be repaired function
 void ClapTrap::beRepaired(unsigned int amount) {
 	if (this->_hitPoints == 0) {
 		std::cout << "ClapTrap " << this->_name << " is beyond repair! It's dead, Jim!" << std::endl;

@@ -5,18 +5,14 @@
 
 class FragTrap : public ClapTrap {
 public:
-	// Constructors
 	FragTrap();
 	FragTrap(const std::string& name);
 	FragTrap(const FragTrap& other);
 
-	// Assignment Operator
 	FragTrap& operator=(const FragTrap& other);
 
-	// Destructor
 	~FragTrap();
 
-	// Special ability
 	void highFivesGuys(void);
 };
 

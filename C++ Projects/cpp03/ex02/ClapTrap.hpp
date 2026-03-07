@@ -12,18 +12,14 @@ protected:
 	unsigned int _attackDamage;
 
 public:
-	// Constructors
 	ClapTrap();
 	ClapTrap(const std::string& name);
 	ClapTrap(const ClapTrap& other);
 
-	// Assignment Operator
 	ClapTrap& operator=(const ClapTrap& other);
 
-	// Destructor
 	~ClapTrap();
 
-	// Subject Methods
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
