@@ -18,7 +18,6 @@ Form::Form(const Form& other)
 Form& Form::operator=(const Form& other) {
     if (this != &other) {
         this->_isSigned = other._isSigned;
-        // _name, _signGrade and _execGrade are const and cannot be assigned.
     }
     return *this;
 }
